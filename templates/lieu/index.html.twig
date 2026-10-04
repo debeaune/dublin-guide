@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lieux à Dublin{% endblock %}
+
+{% block body %}
+<h1>Lieux à Dublin</h1>
+
+{% if lieux is empty %}
+    <p>Aucun lieu pour l'instant.</p>
+{% else %}
+    <ul>
+        {% for lieu in lieux %}
+            <li>{{ lieu.nom }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
