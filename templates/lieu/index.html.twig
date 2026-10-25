@@ -3,15 +3,69 @@
 {% block title %}Lieux à Dublin{% endblock %}
 
 {% block body %}
-<h1>Lieux à Dublin</h1>
+<div class="min-h-screen bg-gray-50">
+    
+    <!-- Header -->
+    <div class="bg-green-800 text-white py-12 text-center">
+        <h1 class="text-4xl font-bold">🍀 Guide de Dublin</h1>
+        <p class="mt-2 text-green-200">Découvrez les meilleurs endroits de la capitale irlandaise</p>
+    </div>
 
-{% if lieux is empty %}
-    <p>Aucun lieu pour l'instant.</p>
-{% else %}
-    <ul>
-        {% for lieu in lieux %}
-            <li>{{ lieu.nom }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+    <!-- Carte Leaflet -->
+    <div id="map" class="w-full" style="height: 300px;"></div>
+
+    <script>
+        const map = L.map('map').setView([53.3498, -6.2603], 14);
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        const lieux = [
+            {% for lieu in lieux %}
+                {
+                    nom: "{{ lieu.nom }}",
+                    lat: {{ lieu.latitude }},
+                    lng: {{ lieu.longitude }},
+                    categorie: "{{ lieu.categorie.nom }}"
+                },
+            {% endfor %}
+        ];
+
+        lieux.forEach(function(lieu) {
+            L.marker([lieu.lat, lieu.lng])
+                .addTo(map)
+                .bindPopup('<b>' + lieu.nom + '</b><br>' + lieu.categorie);
+            });
+    </script>
+
+    <!-- Grille de lieux -->
+    <div class="max-w-6xl mx-auto px-4 py-10">
+        {% if lieux is empty %}
+            <p class="text-center text-gray-500">Aucun lieu pour l'instant.</p>
+        {% else %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for lieu in lieux %}
+                    <div class="bg-white rounded-xl shadow hover:shadow-lg transition duration-200">
+                        <div class="h-40 rounded-t-xl overflow-hidden bg-gray-200">
+                            <img src="/images/lieux/{{ lieu.photo }}"
+                                alt="{{ lieu.nom }}"
+                                class="w-full h-full object-cover"
+                                onerror="this.style.display='none'">
+                        </div>
+                        <div class="p-4">
+                            <span class="text-xs font-semibold uppercase tracking-wide text-green-700 bg-green-100 px-2 py-1 rounded-full">
+                                {{ lieu.categorie.nom }}
+                            </span>
+                            <h2 class="mt-2 text-lg font-bold text-gray-800">{{ lieu.nom }}</h2>
+                            <p class="mt-1 text-sm text-gray-500">{{ lieu.description }}</p>
+                            <p class="mt-2 text-xs text-gray-400">📌 {{ lieu.addresse }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+</div>
 {% endblock %}
