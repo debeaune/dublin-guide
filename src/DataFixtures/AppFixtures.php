@@ -40,6 +40,7 @@ class AppFixtures extends Fixture
         $lieu1->setCategorie($culture);
         $lieu1->setPhoto('trinity.jpg');
         $lieu1->setTags('université histoire manuscrit livre étudiant visite musée gratuit centre');
+        $lieu1->setSiteWeb('https://www.tcd.ie');
         $manager->persist($lieu1);
 
         $lieu2 = new Lieu();
@@ -51,6 +52,7 @@ class AppFixtures extends Fixture
         $lieu2->setCategorie($culture);
         $lieu2->setPhoto('kilmainham.jpg');
         $lieu2->setTags('prison histoire indépendance irlande visite musée guerre politique');
+        $lieu2->setSiteWeb('https://kilmainhamgaol.ie');
         $manager->persist($lieu2);
 
         $lieu3 = new Lieu();
@@ -62,6 +64,7 @@ class AppFixtures extends Fixture
         $lieu3->setCategorie($culture);
         $lieu3->setPhoto('chester_beatty.jpg');
         $lieu3->setTags('musée gratuit manuscrit art collection château visite centre');
+        $lieu3->setSiteWeb('https://chesterbeatty.ie');
         $manager->persist($lieu3);
 
         $lieu4 = new Lieu();
@@ -73,6 +76,7 @@ class AppFixtures extends Fixture
         $lieu4->setCategorie($culture);
         $lieu4->setPhoto('national_museum.jpg');
         $lieu4->setTags('musée gratuit histoire archéologie celte trésor irlande visite centre');
+        $lieu4->setSiteWeb('https://www.museum.ie');
         $manager->persist($lieu4);
 
         $lieu5 = new Lieu();
@@ -84,6 +88,7 @@ class AppFixtures extends Fixture
         $lieu5->setCategorie($culture);
         $lieu5->setPhoto('st_patricks.jpg');
         $lieu5->setTags('cathédrale église religion architecture gothique histoire visite centre');
+        $lieu5->setSiteWeb('https://www.stpatrickscathedral.ie');
         $manager->persist($lieu5);
 
         $lieu6 = new Lieu();
@@ -96,6 +101,7 @@ class AppFixtures extends Fixture
         $lieu6->setPhoto('phoenix.jpg');
         $lieu6->setAnecdote('prévoir au moins une demi-journée, les cerfs s\'approchent vraiment de toi');
         $lieu6->setTags('parc nature cerf animaux balade promenade grand espace vert pique-nique famille');
+        $lieu6->setSiteWeb('https://phoenixpark.ie');
         $manager->persist($lieu6);
 
         $lieu7 = new Lieu();
@@ -108,6 +114,7 @@ class AppFixtures extends Fixture
         $lieu7->setPhoto('howth.jpg');
         $lieu7->setAnecdote('le sentier du cliff walk vaut vraiment le détour, compter 2h pour le tour complet');
         $lieu7->setTags('randonnée falaise vue mer balade sentier nature village pêcheurs cliff walk nord');
+        $lieu7->setSiteWeb('https://howth.org/');
         $manager->persist($lieu7);
 
         $lieu8 = new Lieu();
@@ -120,6 +127,7 @@ class AppFixtures extends Fixture
         $lieu8->setPhoto('stephens_green.jpg');
         $lieu8->setAnecdote('un écrin de verdure avec parterres de fleurs et petit lac, surprenant au cœur du centre-ville de Dublin');
         $lieu8->setTags('parc lac fleurs verdure centre ville repos pique-nique détente promenade canards');
+        $lieu8->setSiteWeb('https://www.ststephensgreenpark.ie/');
         $manager->persist($lieu8);
 
         $lieu9 = new Lieu();
@@ -131,6 +139,7 @@ class AppFixtures extends Fixture
         $lieu9->setCategorie($gastronomie);
         $lieu9->setPhoto('bunsen.jpg');
         $lieu9->setTags('burger restaurant manger fast-food délicieux Dublin local populaire viande');
+        $lieu9->setSiteWeb('https://www.bunsen.ie');
         $manager->persist($lieu9);
 
         $lieu10 = new Lieu();
@@ -142,6 +151,7 @@ class AppFixtures extends Fixture
         $lieu10->setCategorie($gastronomie);
         $lieu10->setPhoto('boxty_house.jpg');
         $lieu10->setTags('restaurant irlandais traditionnel boxty Temple Bar cuisine locale typique manger');
+        $lieu10->setSiteWeb('https://www.boxtyhouse.ie');
         $manager->persist($lieu10);
 
         $lieu11 = new Lieu();
@@ -153,6 +163,7 @@ class AppFixtures extends Fixture
         $lieu11->setCategorie($pub);
         $lieu11->setPhoto('brazen_head.jpg');
         $lieu11->setTags('pub bière guinness musique live irlandais vieux historique soirée ambiance');
+        $lieu11->setSiteWeb('https://www.brazenhead.com');
         $manager->persist($lieu11);
 
         $lieu12 = new Lieu();
@@ -164,6 +175,7 @@ class AppFixtures extends Fixture
         $lieu12->setCategorie($pub);
         $lieu12->setPhoto('mulligans.jpg');
         $lieu12->setTags('pub guinness bière irlandais institution historique soirée ambiance local authentique');
+        $lieu12->setSiteWeb('https://www.mulligans.ie');
         $manager->persist($lieu12);
 
         $lieu13 = new Lieu();
@@ -175,6 +187,7 @@ class AppFixtures extends Fixture
         $lieu13->setCategorie($shopping);
         $lieu13->setPhoto('grafton.jpg');
         $lieu13->setTags('shopping rue commerçante piétonne musique magasin mode centre ville promenade');
+        $lieu13->setSiteWeb('https://www.graftonstreet.ie');
         $manager->persist($lieu13);
 
         $lieu14 = new Lieu();
@@ -186,6 +199,7 @@ class AppFixtures extends Fixture
         $lieu14->setCategorie($shopping);
         $lieu14->setPhoto('georges_arcade.jpg');
         $lieu14->setTags('marché vintage seconde main créateurs bouquiniste couvert original shopping local');
+        $lieu14->setSiteWeb('https://georgesstreetarcade.ie');
         $manager->persist($lieu14);
 
         $lieu15 = new Lieu();
@@ -198,6 +212,7 @@ class AppFixtures extends Fixture
         $lieu15->setPhoto('killiney.jpg');
         $lieu15->setAnecdote('par temps clair on voit jusqu\'au Pays de Galles depuis le sommet');
         $lieu15->setTags('vue panorama colline balade randonnée Wicklow montagne mer sud paysage');
+        $lieu15->setSiteWeb('https://www.dlrcoco.ie/parks-outdoors/parks/killiney-hill-park');
         $manager->persist($lieu15);
 
         $manager->flush();

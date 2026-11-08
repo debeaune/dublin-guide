@@ -38,6 +38,9 @@ class Lieu
     #[ORM\Column(length: 255)]
     private ?string $photo = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $siteWeb = null;
+
     #[ORM\ManyToOne(inversedBy: 'lieux')]
     private ?Categorie $categorie = null;
 
@@ -150,6 +153,17 @@ class Lieu
     {
         $this->categorie = $categorie;
 
+        return $this;
+    }
+
+    public function getSiteWeb(): ?string
+    {
+        return $this->siteWeb;
+    }
+
+    public function setSiteWeb(?string $siteWeb): static
+    {
+        $this->siteWeb = $siteWeb;
         return $this;
     }
 }

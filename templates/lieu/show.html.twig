@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ lieu.nom }} — Dublin Guide{% endblock %}
+
+{% block body %}
+<div class="max-w-4xl mx-auto px-4 py-8">
+
+    <a href="/lieux" class="text-green-700 hover:underline text-sm">← Retour aux lieux</a>
+
+    <div class="bg-white rounded-xl shadow mt-4 overflow-hidden">
+        <img src="/images/lieux/{{ lieu.photo }}" alt="{{ lieu.nom }}" class="w-full h-72 object-cover">
+        
+        <div class="p-6">
+            <div class="flex justify-between items-start">
+                <h1 class="text-3xl font-bold text-gray-800">{{ lieu.nom }}</h1>
+                {% if lieu.categorie %}
+                    <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
+                        {{ lieu.categorie.nom }}
+                    </span>
+                {% endif %}
+            </div>
+
+            <p class="mt-4 text-gray-600">{{ lieu.description }}</p>
+
+            {% if lieu.anecdote %}
+                <div class="mt-4 bg-green-50 border-l-4 border-green-600 p-4 rounded">
+                    <p class="text-green-800 italic">🍀 {{ lieu.anecdote }}</p>
+                </div>
+            {% endif %}
+
+            {% if lieu.addresse %}
+                <p class="mt-4 text-gray-500">📍 {{ lieu.addresse }}</p>
+            {% endif %}
+
+            {% if lieu.siteWeb %}
+                <a href="{{ lieu.siteWeb }}" target="_blank" 
+                   class="inline-block mt-6 bg-green-700 text-white font-bold px-6 py-3 rounded-xl hover:bg-green-800 transition">
+                    🌐 Site officiel
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Carte -->
+    {% if lieu.latitude and lieu.longitude %}
+    <div class="mt-8 bg-white rounded-xl shadow overflow-hidden">
+        <div id="map" style="height: 300px;"></div>
+    </div>
+
+    <script>
+        document.addEventListener('turbo:load', function() {
+            var mapDiv = document.getElementById('map');
+            if (!mapDiv || mapDiv._leaflet_id) return;
+            var map = L.map('map').setView([{{ lieu.latitude }}, {{ lieu.longitude }}], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+            L.marker([{{ lieu.latitude }}, {{ lieu.longitude }}])
+                .addTo(map)
+                .bindPopup('<b>{{ lieu.nom }}</b>').openPopup();
+            setTimeout(function() { map.invalidateSize(); }, 100);
+        });
+    </script>
+    {% endif %}
+
+</div>
+{% endblock %}
