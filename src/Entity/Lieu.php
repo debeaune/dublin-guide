@@ -20,6 +20,12 @@ class Lieu
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $anecdote = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $tags = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $addresse = null;
 
@@ -61,6 +67,29 @@ class Lieu
     {
         $this->description = $description;
 
+        return $this;
+    }
+
+    public function getAnecdote(): ?string
+    {
+        return $this->anecdote;
+    }
+
+    public function setAnecdote(?string $anecdote): static
+    {
+        $this->anecdote = $anecdote;
+
+        return $this;
+    }
+
+    public function getTags(): ?string
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?string $tags): static
+    {
+        $this->tags = $this->tags;
         return $this;
     }
 

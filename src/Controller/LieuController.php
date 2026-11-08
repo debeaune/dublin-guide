@@ -9,6 +9,16 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class LieuController extends AbstractController
 {
+   #[Route('/', name: 'app_home')]
+    public function home(LieuRepository $lieuRepository): Response
+    {
+        $totalLieux = count($lieuRepository->findAll());
+    
+        return $this->render('home/index.html.twig', [
+            'totalLieux' => $totalLieux,
+        ]);
+    }
+
     #[Route('/lieux', name: 'app_lieu_index')]
     public function index(LieuRepository $lieuRepository): Response
     {

@@ -16,28 +16,12 @@ class LieuRepository extends ServiceEntityRepository
         parent::__construct($registry, Lieu::class);
     }
 
-    //    /**
-    //     * @return Lieu[] Returns an array of Lieu objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('l')
-    //            ->andWhere('l.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('l.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Lieu
-    //    {
-    //        return $this->createQueryBuilder('l')
-    //            ->andWhere('l.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findByTag(string $mot): array
+    {
+        return $this->createQueryBuilder('l')
+            ->andWhere('l.tags LIKE :mot OR l.nom LIKE :mot OR l.description LIKE :mot')
+            ->setParameter('mot', '%' . $mot . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

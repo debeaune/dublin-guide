@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dublin Guide — Accueil{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-gray-50">
+
+    <!-- Hero -->
+    <div class="bg-green-800 text-white py-24 text-center hero-section">
+        <h1 class="text-5xl font-bold hero-title">🍀 Bienvenue à Dublin</h1>
+        <p class="mt-4 text-green-200 text-xl hero-subtitle">Découvrez la capitale irlandaise à travers ses meilleurs endroits</p>
+        <div class="mt-8 flex justify-center gap-4">
+            <a href="/lieux" class="bg-white text-green-800 font-bold px-6 py-3 rounded-xl hover:bg-green-100 transition duration-200">
+                Découvrir les lieux
+            </a>
+            <a href="/chatbot" class="border-2 border-white text-white font-bold px-6 py-3 rounded-xl hover:bg-green-700 transition duration-200">
+                🔍 Rechercher
+            </a>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="max-w-4xl mx-auto px-4 py-12 grid grid-cols-2 gap-6 text-center">
+        <div class="bg-white rounded-xl shadow p-8 stat-card">
+            <div class="text-5xl font-bold text-green-700" id="counter-lieux">0</div>
+            <p class="mt-2 text-gray-500">Lieux à découvrir</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-8 stat-card">
+            <div class="text-5xl font-bold text-green-700">🍀</div>
+            <p class="mt-2 text-gray-500">La ville qui ne dort jamais</p>
+        </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="max-w-4xl mx-auto px-4 pb-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <a href="/lieux" class="feature-card bg-white rounded-xl shadow p-6 text-center hover:shadow-lg transition duration-200">
+            <div class="text-4xl mb-3">🗺️</div>
+            <h2 class="font-bold text-gray-800">Carte interactive</h2>
+            <p class="text-sm text-gray-500 mt-1">Visualisez tous les lieux sur une carte</p>
+        </a>
+        <a href="/chatbot" class="feature-card bg-white rounded-xl shadow p-6 text-center hover:shadow-lg transition duration-200">
+            <div class="text-4xl mb-3">🔍</div>
+            <h2 class="font-bold text-gray-800">Recherche</h2>
+            <p class="text-sm text-gray-500 mt-1">Trouvez un lieu par mot-clé</p>
+        </a>
+        <a href="/lieux" class="feature-card bg-white rounded-xl shadow p-6 text-center hover:shadow-lg transition duration-200">
+            <div class="text-4xl mb-3">⭐</div>
+            <h2 class="font-bold text-gray-800">Coups de cœur</h2>
+            <p class="text-sm text-gray-500 mt-1">Les incontournables de Dublin</p>
+        </a>
+    </div>
+
+</div>
+
+<style>
+    .hero-title { animation: fadeInDown 0.8s ease both; }
+    .hero-subtitle { animation: fadeInDown 0.8s ease 0.2s both; }
+    .hero-section a { animation: fadeInDown 0.8s ease 0.4s both; }
+    .stat-card { animation: fadeInUp 0.6s ease both; }
+    .feature-card { transform: translateY(0); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .feature-card:hover { transform: translateY(-4px); }
+
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    document.addEventListener('turbo:load', function() {
+        const target = {{ totalLieux }};
+        let count = 0;
+        const el = document.getElementById('counter-lieux');
+        if (!el) return;
+        const interval = setInterval(function() {
+            count++;
+            el.textContent = count;
+            if (count >= target) clearInterval(interval);
+        }, 50);
+    });
+</script>
+
+{% endblock %}
